@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Token Access</title>
+</head>
+<body>
+    <h1>Authentication Token Test</h1>
+    <button onclick="checkTokens()">Check Available Tokens</button>
+    <button onclick="setTestToken()">Set Test Token</button>
+    <div id="results"></div>
+
+    <script>
+        function checkTokens() {
+            const tokens = {
+                rabhan_access_token: localStorage.getItem('rabhan_access_token'),
+                token: localStorage.getItem('token'),
+                accessToken: localStorage.getItem('accessToken')
+            };
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h3>Available Tokens:</h3><pre>' + JSON.stringify(tokens, null, 2) + '</pre>';
+            
+            console.log('🔍 Token check results:', tokens);
+        }
+        
+        function setTestToken() {
+            const testToken = 'test-token-' + Date.now();
+            localStorage.setItem('rabhan_access_token', testToken);
+            console.log('✅ Test token set:', testToken);
+            checkTokens();
+        }
+        
+        // Run check on page load
+        window.onload = checkTokens;
+    </script>
+</body>
+</html>

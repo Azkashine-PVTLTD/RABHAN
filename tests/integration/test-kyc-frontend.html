@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test KYC Frontend</title>
+</head>
+<body>
+    <h2>KYC Service Test</h2>
+    <div id="result"></div>
+    
+    <script>
+        async function testKYCService() {
+            try {
+                const response = await fetch('http://localhost:3003/api/kyc/status?userId=1f475729-c2e0-4b3d-a678-e4a4ea4d6cc0&userRole=customer', {
+                    headers: { 
+                        'Authorization': 'Bearer test-token',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                const kycStatus = data.kyc_status;
+                
+                // Calculate statistics like the frontend component
+                const requiredCategories = kycStatus.requirements.filter(req => req.required);
+                const completedCategories = requiredCategories.filter(req => req.approved);
+                const uploadedCategories = requiredCategories.filter(req => req.uploaded);
+                const progressPercentage = kycStatus.completionPercentage;
+                
+                document.getElementById('result').innerHTML = `
+                    <h3>KYC Dashboard Statistics Test</h3>
+                    <p><strong>Progress:</strong> ${progressPercentage}%</p>
+                    <p><strong>Completed:</strong> ${completedCategories.length}</p>
+                    <p><strong>Remaining:</strong> ${requiredCategories.length - completedCategories.length}</p>
+                    <p><strong>Uploaded:</strong> ${uploadedCategories.length}</p>
+                    <p><strong>Total Required:</strong> ${requiredCategories.length}</p>
+                    
+                    <h4>Requirements Breakdown:</h4>
+                    <ul>
+                        ${requiredCategories.map(req => `
+                            <li>${req.categoryName}: 
+                                ${req.uploaded ? '📄 Uploaded' : '❌ Not Uploaded'} | 
+                                ${req.approved ? '✅ Approved' : '⏳ Pending'}
+                            </li>
+                        `).join('')}
+                    </ul>
+                    
+                    <h4>Expected vs Previous Issue:</h4>
+                    <p style="color: green;"><strong>✅ NEW (Correct):</strong> ${progressPercentage}% Progress, ${uploadedCategories.length} Uploaded, ${completedCategories.length} Approved</p>
+                    <p style="color: red;"><strong>❌ OLD (Bug):</strong> 0% Progress, 0 Uploaded, 0 Approved</p>
+                `;
+                
+            } catch (error) {
+                document.getElementById('result').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+        
+        testKYCService();
+    </script>
+</body>
+</html>

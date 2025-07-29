@@ -1,0 +1,34 @@
+export interface EnvironmentConfig {
+    PORT: number;
+    NODE_ENV: string;
+    SERVICE_NAME: string;
+    DATABASE_HOST: string;
+    DATABASE_PORT: number;
+    DATABASE_NAME: string;
+    DATABASE_USER: string;
+    DATABASE_PASSWORD: string;
+    JWT_SECRET: string;
+    JWT_EXPIRES_IN: string;
+    BCRYPT_ROUNDS: number;
+    AUTH_SERVICE_URL: string;
+    USER_SERVICE_URL: string;
+    DOCUMENT_SERVICE_URL: string;
+    MAX_FILE_SIZE: number;
+    ALLOWED_FILE_TYPES: string[];
+    UPLOAD_PATH: string;
+    RATE_LIMIT_WINDOW_MS: number;
+    RATE_LIMIT_MAX_REQUESTS: number;
+    DEFAULT_TIMEZONE: string;
+    DEFAULT_LOCALE: string;
+    SAUDI_REGIONS: string[];
+    AUDIT_LOG_RETENTION_DAYS: number;
+    SAMA_REPORTING_ENABLED: boolean;
+    COMPLIANCE_LEVEL: string;
+    ENABLE_METRICS: boolean;
+    LOG_LEVEL: string;
+    MIN_CONTRACTOR_AGE: number;
+    MAX_SERVICE_AREAS: number;
+    VERIFICATION_EXPIRY_DAYS: number;
+}
+export declare const config: EnvironmentConfig;
+export default config;
