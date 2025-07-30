@@ -236,6 +236,9 @@
   "registration": {
     "title": "أهلاً بك في ربحان",
     "subtitle": "منصة رابحة للجميع!",
+    "already_have_account": "لديك حساب بالفعل؟",
+    "login_here": "سجل الدخول هنا",
+    "registration_failed": "فشل التسجيل. يرجى المحاولة مرة أخرى.",
     "user": {
       "title": "تسجيل المستهلك",
       "subtitle": "حوّل مقرك مع ربحان",
@@ -266,7 +269,7 @@
       "firstName_placeholder": "أدخل اسمك الأول",
       "lastName_placeholder": "أدخل اسمك الأخير",
       "companyName_placeholder": "أدخل اسم شركتك",
-      "businessEmail_placeholder": "admin@yourcompany.com",
+      "businessEmail_placeholder": "البريد الإلكتروني التجاري",
       "password_placeholder": "أنشئ كلمة مرور قوية",
       "confirmPassword_placeholder": "أكد كلمة المرور",
       "crNumber_placeholder": "1010123456",
@@ -416,7 +419,7 @@
       "sending": "جاري الإرسال...",
       "resend": "إعادة إرسال",
       "enterOTP": "أدخل رمز التحقق",
-      "otpPlaceholder": "123456",
+      "otpPlaceholder": "أدخل رمز التحقق",
       "verify": "تحقق",
       "verifying": "جاري التحقق...",
       "otpSentTo": "تم إرسال رمز التحقق إلى",
@@ -459,10 +462,7 @@
         "streetAddressRequired": "عنوان الشارع مطلوب",
         "postalCodeRequired": "الرمز البريدي مطلوب"
       }
-    },
-    "already_have_account": "لديك حساب بالفعل؟",
-    "login_here": "سجل الدخول هنا",
-    "registration_failed": "فشل التسجيل. يرجى المحاولة مرة أخرى."
+    }
   },
   "validation": {
     "nameMinLength": "الاسم يجب أن يكون حرفين على الأقل",
