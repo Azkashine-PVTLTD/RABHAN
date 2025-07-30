@@ -42,7 +42,38 @@
     "no": "لا",
     "enabled": "مفعل",
     "disabled": "معطل",
-    "unknown": "غير معروف"
+    "unknown": "غير معروف",
+    "optional": "اختياري"
+  },
+  "countries": {
+    "saudi_arabia": "المملكة العربية السعودية",
+    "india": "الهند"
+  },
+  "form": {
+    "first_name": "الاسم الأول",
+    "last_name": "الاسم الأخير",
+    "first_name_placeholder": "أدخل اسمك الأول",
+    "last_name_placeholder": "أدخل اسمك الأخير",
+    "business_email": "البريد الإلكتروني التجاري",
+    "business_email_placeholder": "أدخل بريدك الإلكتروني التجاري",
+    "business_phone": "الهاتف التجاري",
+    "saudi_phone_hint": "أرقام الهواتف السعودية فقط (+966)",
+    "next_step": "الخطوة التالية",
+    "company_name": "اسم الشركة",
+    "company_name_placeholder": "أدخل اسم شركتك",
+    "cr_number": "رقم السجل التجاري",
+    "vat_number": "رقم ضريبة القيمة المضافة",
+    "password": "كلمة المرور",
+    "password_placeholder": "أدخل كلمة مرور قوية",
+    "confirm_password": "تأكيد كلمة المرور",
+    "confirm_password_placeholder": "أكد كلمة المرور",
+    "agree_to_terms": "أوافق على",
+    "terms_and_conditions": "الشروط والأحكام",
+    "and": "و",
+    "privacy_policy": "سياسة الخصوصية",
+    "back": "عودة",
+    "registering": "جاري التسجيل...",
+    "register_contractor": "تسجيل كمقاول"
   },
   "documents": {
     "title": "إدارة المستندات",
@@ -232,6 +263,16 @@
       "title": "تسجيل البائع والمقاول",
       "subtitle": "نمِّ أعمالك مع ربحان",
       "joinButton": "انضم لشبكة ربحان",
+      "firstName_placeholder": "أدخل اسمك الأول",
+      "lastName_placeholder": "أدخل اسمك الأخير",
+      "companyName_placeholder": "أدخل اسم شركتك",
+      "businessEmail_placeholder": "admin@yourcompany.com",
+      "password_placeholder": "أنشئ كلمة مرور قوية",
+      "confirmPassword_placeholder": "أكد كلمة المرور",
+      "crNumber_placeholder": "1010123456",
+      "vatNumber_placeholder": "300123456789003",
+      "crNumber_tooltip": "رقم السجل التجاري السعودي (10 أرقام، يبدأ بـ 10/20/30/40)",
+      "vatNumber_tooltip": "رقم ضريبة القيمة المضافة السعودي (15 رقماً، يبدأ وينتهي بـ 3)",
       "benefits": {
         "marketplace": {
           "title": "سوق رقمي",
@@ -332,6 +373,14 @@
       "nationalIdPlaceholder": "رقم الهوية الوطنية السعودية (10 أرقام)",
       "passwordPlaceholder": "أدخل كلمة مرور قوية",
       "confirmPasswordPlaceholder": "تأكيد كلمة المرور",
+      "sendOTP": "إرسال رمز التحقق",
+      "sending": "جاري الإرسال...",
+      "resend": "إعادة إرسال",
+      "verify": "تحقق",
+      "verifying": "جاري التحقق...",
+      "verified": "تم التحقق ✓",
+      "otpPlaceholder": "أدخل رمز التحقق",
+      "phonePlaceholder": "5XXXXXXXX",
       "steps": {
         "personal": "شخصي",
         "contact": "تواصل",
@@ -410,7 +459,10 @@
         "streetAddressRequired": "عنوان الشارع مطلوب",
         "postalCodeRequired": "الرمز البريدي مطلوب"
       }
-    }
+    },
+    "already_have_account": "لديك حساب بالفعل؟",
+    "login_here": "سجل الدخول هنا",
+    "registration_failed": "فشل التسجيل. يرجى المحاولة مرة أخرى."
   },
   "validation": {
     "nameMinLength": "الاسم يجب أن يكون حرفين على الأقل",
@@ -436,7 +488,65 @@
     "employerMinLength": "اسم صاحب العمل يجب أن يكون حرفين على الأقل",
     "jobTitleMinLength": "المسمى الوظيفي يجب أن يكون حرفين على الأقل",
     "validInput": "صحيح",
-    "saving": "جاري الحفظ..."
+    "saving": "جاري الحفظ...",
+    "firstName_required": "الاسم الأول مطلوب",
+    "lastName_required": "الاسم الأخير مطلوب",
+    "email_required": "البريد الإلكتروني مطلوب",
+    "email_invalid": "يرجى إدخال بريد إلكتروني صالح",
+    "phone_required": "رقم الهاتف مطلوب",
+    "phone_invalid": "يرجى إدخال رقم هاتف سعودي صالح",
+    "password_required": "كلمة المرور مطلوبة",
+    "password_min_length": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+    "confirm_password_required": "يرجى تأكيد كلمة المرور",
+    "passwords_dont_match": "كلمات المرور غير متطابقة",
+    "company_name_required": "اسم الشركة مطلوب",
+    "agree_to_terms_required": "يجب الموافقة على الشروط والأحكام",
+    "email_already_registered": "هذا البريد الإلكتروني مسجل بالفعل",
+    "phone_already_registered": "رقم الهاتف هذا مسجل بالفعل",
+    "firstName_minLength": "الاسم الأول يجب أن يكون حرفين على الأقل",
+    "firstName_maxLength": "الاسم الأول يجب أن يكون أقل من 50 حرفاً",
+    "firstName_invalid": "الاسم الأول يمكن أن يحتوي على أحرف ومسافات وواصلات فقط",
+    "firstName_spaces": "الاسم الأول لا يمكن أن يبدأ أو ينتهي بمسافات",
+    "firstName_consecutive": "الاسم الأول لا يمكن أن يحتوي على مسافات متتالية",
+    "lastName_minLength": "الاسم الأخير يجب أن يكون حرفين على الأقل",
+    "lastName_maxLength": "الاسم الأخير يجب أن يكون أقل من 50 حرفاً",
+    "lastName_invalid": "الاسم الأخير يمكن أن يحتوي على أحرف ومسافات وواصلات فقط",
+    "lastName_spaces": "الاسم الأخير لا يمكن أن يبدأ أو ينتهي بمسافات",
+    "lastName_consecutive": "الاسم الأخير لا يمكن أن يحتوي على مسافات متتالية",
+    "email_maxLength": "عنوان البريد الإلكتروني يجب أن يكون أقل من 100 حرف",
+    "email_business": "يرجى استخدام بريد إلكتروني تجاري (وليس شخصي)",
+    "email_consecutive": "البريد الإلكتروني لا يمكن أن يحتوي على نقاط متتالية",
+    "email_dots": "البريد الإلكتروني لا يمكن أن يبدأ أو ينتهي بنقطة",
+    "password_maxLength": "كلمة المرور يجب أن تكون أقل من 128 حرفاً",
+    "password_lowercase": "كلمة المرور يجب أن تحتوي على حرف صغير واحد على الأقل",
+    "password_uppercase": "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
+    "password_number": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+    "password_special": "كلمة المرور يجب أن تحتوي على رمز خاص واحد على الأقل",
+    "password_spaces": "كلمة المرور لا يمكن أن تحتوي على مسافات",
+    "password_consecutive": "كلمة المرور لا يمكن أن تحتوي على أكثر من حرفين متطابقين متتاليين",
+    "password_common": "كلمة المرور شائعة جداً، يرجى اختيار كلمة مرور أقوى",
+    "confirm_password_mismatch": "كلمات المرور غير متطابقة",
+    "phone_business_required": "رقم هاتف العمل مطلوب",
+    "phone_saudi_invalid": "يرجى إدخال رقم جوال سعودي صحيح (5XXXXXXXX)",
+    "phone_indian_invalid": "أرقام الجوال الهندية يجب أن تبدأ بـ 6 أو 7 أو 8 أو 9",
+    "phone_must_verify": "يجب التحقق من رقم الهاتف قبل التسجيل",
+    "company_name_minLength": "اسم الشركة يجب أن يكون حرفين على الأقل",
+    "company_name_maxLength": "اسم الشركة يجب أن يكون أقل من 100 حرف",
+    "company_name_invalid": "اسم الشركة يحتوي على أحرف غير صالحة",
+    "company_name_spaces": "اسم الشركة لا يمكن أن يبدأ أو ينتهي بمسافات",
+    "company_name_consecutive": "اسم الشركة لا يمكن أن يحتوي على مسافات متتالية",
+    "cr_number_digits": "رقم السجل التجاري يجب أن يحتوي على أرقام فقط",
+    "cr_number_length": "رقم السجل التجاري يجب أن يكون 10 أرقام بالضبط",
+    "cr_number_start": "رقم السجل التجاري يجب أن يبدأ بـ 10 أو 20 أو 30 أو 40",
+    "vat_number_digits": "رقم ضريبة القيمة المضافة يجب أن يحتوي على أرقام فقط",
+    "vat_number_length": "رقم ضريبة القيمة المضافة يجب أن يكون 15 رقماً بالضبط",
+    "vat_number_format": "رقم ضريبة القيمة المضافة يجب أن يبدأ وينتهي بـ 3",
+    "terms_required": "يجب الموافقة على الشروط والأحكام للتسجيل",
+    "invalid_characters": "تم اكتشاف أحرف غير صالحة",
+    "names_identical": "الاسم الأول والأخير لا يمكن أن يكونا متطابقين",
+    "temp_email": "عناوين البريد الإلكتروني المؤقتة غير مسموحة",
+    "email_domain_invalid": "طول نطاق البريد الإلكتروني غير صالح",
+    "company_name_generic": "يرجى إدخال اسم شركتك الفعلي"
   },
   "phone": {
     "verification": {
@@ -446,6 +556,14 @@
       "failed": "فشل التحقق من الهاتف. يرجى المحاولة مرة أخرى.",
       "skip": "تخطي الآن",
       "back": "تغيير رقم الهاتف"
+    },
+    "otp": {
+      "send": {
+        "failed": "فشل في إرسال رمز التحقق"
+      },
+      "validation": {
+        "length": "يرجى إدخال رمز مكون من 6 أرقام"
+      }
     },
     "country": {
       "label": "الدولة",

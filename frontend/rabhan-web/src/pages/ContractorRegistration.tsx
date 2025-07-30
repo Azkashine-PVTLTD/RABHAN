@@ -126,11 +126,11 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
   });
 
   // Phone country selection
-  const [selectedCountry, setSelectedCountry] = useState({ code: '+966', flag: '🇸🇦', name: 'Saudi Arabia', digits: 9 });
+  const [selectedCountry, setSelectedCountry] = useState({ code: '+966', flag: '🇸🇦', name: t('countries.saudi_arabia'), digits: 9 });
   
   const countries = [
-    { code: '+966', flag: '🇸🇦', name: 'Saudi Arabia', digits: 9, format: '5XX XXX XXXX' },
-    { code: '+91', flag: '🇮🇳', name: 'India', digits: 10, format: 'XXXXX XXXXX' }
+    { code: '+966', flag: '🇸🇦', name: t('countries.saudi_arabia'), digits: 9, format: '5XX XXX XXXX' },
+    { code: '+91', flag: '🇮🇳', name: t('countries.india'), digits: 10, format: 'XXXXX XXXXX' }
   ];
 
   // Responsive breakpoint state
@@ -151,96 +151,96 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
     switch (field) {
       case 'firstName':
         if (!value.trim()) return t('validation.firstName_required');
-        if (value.length < 2) return 'First name must be at least 2 characters';
-        if (value.length > 50) return 'First name must be less than 50 characters';
-        if (!/^[a-zA-Z\u0600-\u06FF\s'-]+$/.test(value.trim())) return 'First name can only contain letters, spaces, hyphens and apostrophes';
-        if (/^\s|\s$/.test(value)) return 'First name cannot start or end with spaces';
-        if (/\s{2,}/.test(value)) return 'First name cannot have consecutive spaces';
+        if (value.length < 2) return t('validation.firstName_minLength');
+        if (value.length > 50) return t('validation.firstName_maxLength');
+        if (!/^[a-zA-Z\u0600-\u06FF\s'-]+$/.test(value.trim())) return t('validation.firstName_invalid');
+        if (/^\s|\s$/.test(value)) return t('validation.firstName_spaces');
+        if (/\s{2,}/.test(value)) return t('validation.firstName_consecutive');
         return null;
 
       case 'lastName':
         if (!value.trim()) return t('validation.lastName_required');
-        if (value.length < 2) return 'Last name must be at least 2 characters';
-        if (value.length > 50) return 'Last name must be less than 50 characters';
-        if (!/^[a-zA-Z\u0600-\u06FF\s'-]+$/.test(value.trim())) return 'Last name can only contain letters, spaces, hyphens and apostrophes';
-        if (/^\s|\s$/.test(value)) return 'Last name cannot start or end with spaces';
-        if (/\s{2,}/.test(value)) return 'Last name cannot have consecutive spaces';
+        if (value.length < 2) return t('validation.lastName_minLength');
+        if (value.length > 50) return t('validation.lastName_maxLength');
+        if (!/^[a-zA-Z\u0600-\u06FF\s'-]+$/.test(value.trim())) return t('validation.lastName_invalid');
+        if (/^\s|\s$/.test(value)) return t('validation.lastName_spaces');
+        if (/\s{2,}/.test(value)) return t('validation.lastName_consecutive');
         return null;
 
       case 'email':
         if (!value.trim()) return t('validation.email_required');
         const emailTrimmed = value.trim().toLowerCase();
-        if (emailTrimmed.length > 100) return 'Email address must be less than 100 characters';
+        if (emailTrimmed.length > 100) return t('validation.email_maxLength');
         // Comprehensive email validation
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-        if (!emailRegex.test(emailTrimmed)) return 'Please enter a valid business email address';
+        if (!emailRegex.test(emailTrimmed)) return t('validation.email_invalid');
         // Business email domain validation
         const commonPersonalDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'aol.com', 'live.com'];
         const domain = emailTrimmed.split('@')[1];
-        if (commonPersonalDomains.includes(domain)) return 'Please use a business email address (not personal email)';
-        if (emailTrimmed.includes('..')) return 'Email cannot contain consecutive dots';
-        if (emailTrimmed.startsWith('.') || emailTrimmed.endsWith('.')) return 'Email cannot start or end with a dot';
+        if (commonPersonalDomains.includes(domain)) return t('validation.email_business');
+        if (emailTrimmed.includes('..')) return t('validation.email_consecutive');
+        if (emailTrimmed.startsWith('.') || emailTrimmed.endsWith('.')) return t('validation.email_dots');
         return null;
 
       case 'password':
         if (!value) return t('validation.password_required');
-        if (value.length < 8) return 'Password must be at least 8 characters long';
-        if (value.length > 128) return 'Password must be less than 128 characters';
-        if (!/(?=.*[a-z])/.test(value)) return 'Password must contain at least one lowercase letter';
-        if (!/(?=.*[A-Z])/.test(value)) return 'Password must contain at least one uppercase letter';
-        if (!/(?=.*\d)/.test(value)) return 'Password must contain at least one number';
-        if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(value)) return 'Password must contain at least one special character';
-        if (/\s/.test(value)) return 'Password cannot contain spaces';
+        if (value.length < 8) return t('validation.password_min_length');
+        if (value.length > 128) return t('validation.password_maxLength');
+        if (!/(?=.*[a-z])/.test(value)) return t('validation.password_lowercase');
+        if (!/(?=.*[A-Z])/.test(value)) return t('validation.password_uppercase');
+        if (!/(?=.*\d)/.test(value)) return t('validation.password_number');
+        if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(value)) return t('validation.password_special');
+        if (/\s/.test(value)) return t('validation.password_spaces');
         // Check for common weak patterns
-        if (/(.)\1{2,}/.test(value)) return 'Password cannot have more than 2 consecutive identical characters';
+        if (/(.)\1{2,}/.test(value)) return t('validation.password_consecutive');
         const commonPasswords = ['password', 'Password', 'PASSWORD', '12345678', 'qwerty', 'abc123', 'password123', 'admin123'];
         if (commonPasswords.some(common => value.toLowerCase().includes(common.toLowerCase()))) {
-          return 'Password is too common, please choose a stronger password';
+          return t('validation.password_common');
         }
         return null;
 
       case 'confirmPassword':
-        if (!value) return 'Please confirm your password';
-        if (value !== formData.password) return 'Passwords do not match';
+        if (!value) return t('validation.confirm_password_required');
+        if (value !== formData.password) return t('validation.confirm_password_mismatch');
         return null;
 
       case 'phone':
-        if (!value.trim()) return 'Business phone number is required';
+        if (!value.trim()) return t('validation.phone_business_required');
         const phoneDigits = value.replace(/\D/g, '');
         
         // Country-specific validation
         if (selectedCountry.code === '+966') {
-          if (phoneDigits.length !== 9) return 'Saudi phone number must be 9 digits';
-          if (!phoneDigits.startsWith('5')) return 'Saudi mobile numbers must start with 5';
-          if (!/^5[0-9]{8}$/.test(phoneDigits)) return 'Please enter a valid Saudi mobile number (5XXXXXXXX)';
+          if (phoneDigits.length !== 9) return t('validation.phone_saudi_invalid');
+          if (!phoneDigits.startsWith('5')) return t('validation.phone_saudi_invalid');
+          if (!/^5[0-9]{8}$/.test(phoneDigits)) return t('validation.phone_saudi_invalid');
         } else if (selectedCountry.code === '+91') {
-          if (phoneDigits.length !== 10) return 'Indian phone number must be 10 digits';
-          if (!['6', '7', '8', '9'].includes(phoneDigits[0])) return 'Indian mobile numbers must start with 6, 7, 8, or 9';
+          if (phoneDigits.length !== 10) return t('validation.phone_indian_invalid');
+          if (!['6', '7', '8', '9'].includes(phoneDigits[0])) return t('validation.phone_indian_invalid');
         }
         
         // If phone is provided, it must be verified
         if (value.trim() && !phoneVerification.isVerified) {
-          return 'Phone number must be verified before registration';
+          return t('validation.phone_must_verify');
         }
         return null;
 
       case 'companyName':
-        if (!value.trim()) return 'Company name is required';
-        if (value.length < 2) return 'Company name must be at least 2 characters';
-        if (value.length > 100) return 'Company name must be less than 100 characters';
-        if (!/^[a-zA-Z0-9\u0600-\u06FF\s\-&.,()]+$/.test(value.trim())) return 'Company name contains invalid characters';
-        if (/^\s|\s$/.test(value)) return 'Company name cannot start or end with spaces';
-        if (/\s{2,}/.test(value)) return 'Company name cannot have consecutive spaces';
+        if (!value.trim()) return t('validation.company_name_required');
+        if (value.length < 2) return t('validation.company_name_minLength');
+        if (value.length > 100) return t('validation.company_name_maxLength');
+        if (!/^[a-zA-Z0-9\u0600-\u06FF\s\-&.,()]+$/.test(value.trim())) return t('validation.company_name_invalid');
+        if (/^\s|\s$/.test(value)) return t('validation.company_name_spaces');
+        if (/\s{2,}/.test(value)) return t('validation.company_name_consecutive');
         return null;
 
       case 'crNumber':
         // CR Number is optional, but if provided, validate format
         if (value && value.trim()) {
           const crTrimmed = value.trim();
-          if (!/^[0-9]+$/.test(crTrimmed)) return 'CR number must contain only digits';
-          if (crTrimmed.length !== 10) return 'CR number must be exactly 10 digits';
+          if (!/^[0-9]+$/.test(crTrimmed)) return t('validation.cr_number_digits');
+          if (crTrimmed.length !== 10) return t('validation.cr_number_length');
           if (!crTrimmed.startsWith('10') && !crTrimmed.startsWith('20') && !crTrimmed.startsWith('30') && !crTrimmed.startsWith('40')) {
-            return 'CR number must start with 10, 20, 30, or 40';
+            return t('validation.cr_number_start');
           }
         }
         return null;
@@ -249,16 +249,16 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
         // VAT Number is optional, but if provided, validate format
         if (value && value.trim()) {
           const vatTrimmed = value.trim();
-          if (!/^[0-9]+$/.test(vatTrimmed)) return 'VAT number must contain only digits';
-          if (vatTrimmed.length !== 15) return 'VAT number must be exactly 15 digits';
+          if (!/^[0-9]+$/.test(vatTrimmed)) return t('validation.vat_number_digits');
+          if (vatTrimmed.length !== 15) return t('validation.vat_number_length');
           if (!vatTrimmed.startsWith('3') || !vatTrimmed.endsWith('3')) {
-            return 'VAT number must start and end with 3';
+            return t('validation.vat_number_format');
           }
         }
         return null;
 
       case 'agreeToTerms':
-        if (!value) return 'You must agree to the Terms and Conditions to register';
+        if (!value) return t('validation.terms_required');
         return null;
 
       default:
@@ -368,7 +368,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
       if (typeof value === 'string') {
         for (const pattern of suspiciousPatterns) {
           if (pattern.test(value)) {
-            (securityErrors as any)[key] = 'Invalid characters detected';
+            (securityErrors as any)[key] = t('validation.invalid_characters');
             break;
           }
         }
@@ -377,7 +377,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
     
     // Additional business logic validations
     if (formData.firstName && formData.lastName && formData.firstName.toLowerCase() === formData.lastName.toLowerCase()) {
-      securityErrors.lastName = 'First name and last name cannot be identical';
+      securityErrors.lastName = t('validation.names_identical');
     }
     
     // Email domain additional checks
@@ -387,12 +387,12 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
         // Check for suspicious domains
         const suspiciousDomains = ['10minutemail.com', 'tempmail.org', 'guerrillamail.com', 'mailinator.com'];
         if (suspiciousDomains.some(d => domain.includes(d))) {
-          securityErrors.email = 'Temporary email addresses are not allowed';
+          securityErrors.email = t('validation.temp_email');
         }
         
         // Check domain length
         if (domain.length < 4 || domain.length > 63) {
-          securityErrors.email = 'Email domain length is invalid';
+          securityErrors.email = t('validation.email_domain_invalid');
         }
       }
     }
@@ -401,7 +401,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
     if (formData.companyName) {
       const commonInvalidCompanyNames = ['test', 'company', 'business', 'corp', 'inc', 'ltd', 'llc'];
       if (commonInvalidCompanyNames.includes(formData.companyName.toLowerCase().trim())) {
-        securityErrors.companyName = 'Please enter your actual company name';
+        securityErrors.companyName = t('validation.company_name_generic');
       }
     }
     
@@ -656,10 +656,10 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
-              {t('registration.contractor_title')}
+              {t('registration.contractor.title')}
             </h1>
             <p style={{ color: '#6b7280' }}>
-              {t('registration.contractor_subtitle')}
+              {t('registration.contractor.subtitle')}
             </p>
           </div>
 
@@ -695,7 +695,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
                   type="text"
                   value={formData.firstName}
                   onChange={(e) => handleInputChange('firstName', e.target.value)}
-                  placeholder={t('form.first_name_placeholder')}
+                  placeholder={t('registration.contractor.firstName_placeholder')}
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -722,7 +722,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
                   type="text"
                   value={formData.lastName}
                   onChange={(e) => handleInputChange('lastName', e.target.value)}
-                  placeholder={t('form.last_name_placeholder')}
+                  placeholder={t('registration.contractor.lastName_placeholder')}
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -751,7 +751,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
                 type="text"
                 value={formData.companyName}
                 onChange={(e) => handleInputChange('companyName', e.target.value)}
-                placeholder={t('form.company_name_placeholder')}
+                placeholder={t('registration.contractor.companyName_placeholder')}
                 style={{
                   width: '100%',
                   padding: '0.75rem',
@@ -779,14 +779,14 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
             }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '500' }}>
-                  {t('form.cr_number')} <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>(Optional)</span>
+                  {t('form.cr_number')} <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>({t('common.optional')})</span>
                 </label>
                 <input
                   type="text"
                   value={formData.crNumber}
                   onChange={(e) => handleInputChange('crNumber', e.target.value)}
-                  placeholder="1010123456"
-                  title="Saudi Commercial Registration number (10 digits, starting with 10/20/30/40)"
+                  placeholder={t('registration.contractor.crNumber_placeholder')}
+                  title={t('registration.contractor.crNumber_tooltip')}
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -807,14 +807,14 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
 
               <div>
                 <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: '500' }}>
-                  {t('form.vat_number')} <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>(Optional)</span>
+                  {t('form.vat_number')} <span style={{ color: '#6b7280', fontSize: '0.75rem' }}>({t('common.optional')})</span>
                 </label>
                 <input
                   type="text"
                   value={formData.vatNumber}
                   onChange={(e) => handleInputChange('vatNumber', e.target.value)}
-                  placeholder="300123456789003"
-                  title="Saudi VAT number (15 digits, starting and ending with 3)"
+                  placeholder={t('registration.contractor.vatNumber_placeholder')}
+                  title={t('registration.contractor.vatNumber_tooltip')}
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -843,7 +843,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                placeholder={t('form.business_email_placeholder')}
+                placeholder={t('registration.contractor.businessEmail_placeholder')}
                 style={{
                   width: '100%',
                   padding: '0.75rem',
@@ -1098,7 +1098,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
                   onChange={(e) => handleInputChange('password', e.target.value)}
-                  placeholder={t('form.password_placeholder')}
+                  placeholder={t('registration.contractor.password_placeholder')}
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -1130,7 +1130,7 @@ const ContractorRegistration: React.FC<ContractorRegistrationProps> = ({
                   type={showConfirmPassword ? 'text' : 'password'}
                   value={formData.confirmPassword}
                   onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                  placeholder={t('form.confirm_password_placeholder')}
+                  placeholder={t('registration.contractor.confirmPassword_placeholder')}
                   style={{
                     width: '100%',
                     padding: '0.75rem',
