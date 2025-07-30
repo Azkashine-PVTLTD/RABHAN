@@ -101,31 +101,13 @@ print_step "4" "PostgreSQL Database Setup"
 sudo systemctl start postgresql
 sudo systemctl enable postgresql
 
-# Create databases and users
-sudo -u postgres psql << EOF
--- Create databases
-CREATE DATABASE rabhan_auth;
-CREATE DATABASE rabhan_user;
-CREATE DATABASE rabhan_documents;
-CREATE DATABASE rabhan_contractors;
+# Create databases and users using the comprehensive setup script
+sudo -u postgres psql -f ./deployment/database/setup-databases.sql
+check_success "Database and users creation"
 
--- Create users with secure passwords (will be updated with generated passwords)
-CREATE USER rabhan_auth WITH ENCRYPTED PASSWORD 'temp_password_auth';
-CREATE USER rabhan_user WITH ENCRYPTED PASSWORD 'temp_password_user';
-CREATE USER rabhan_documents WITH ENCRYPTED PASSWORD 'temp_password_documents';
-CREATE USER rabhan_contractors WITH ENCRYPTED PASSWORD 'temp_password_contractors';
-
--- Grant privileges
-GRANT ALL PRIVILEGES ON DATABASE rabhan_auth TO rabhan_auth;
-GRANT ALL PRIVILEGES ON DATABASE rabhan_user TO rabhan_user;
-GRANT ALL PRIVILEGES ON DATABASE rabhan_documents TO rabhan_documents;
-GRANT ALL PRIVILEGES ON DATABASE rabhan_contractors TO rabhan_contractors;
-
--- Exit
-\q
-EOF
-
-check_success "Database setup"
+# Run the complete schema setup
+sudo -u postgres psql -f ./deployment/database/production-schema-setup.sql
+check_success "Database schema setup"
 
 # Step 5: Redis Configuration
 print_step "5" "Redis Configuration"
